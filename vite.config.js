@@ -31,54 +31,9 @@ const inputs = Object.fromEntries(
   }),
 );
 
-function resolveHtmlPath(rootDir, urlPath) {
-  const normalizedPath = urlPath.replace(/\?.*$/u, "");
-  if (path.extname(normalizedPath)) {
-    return null;
-  }
-  if (normalizedPath.endsWith("/")) {
-    const indexCandidate = path.join(
-      rootDir,
-      normalizedPath.slice(1),
-      "index.html",
-    );
-    return fs.existsSync(indexCandidate) ? `${normalizedPath}index.html` : null;
-  }
-  const htmlCandidate = path.join(rootDir, `${normalizedPath.slice(1)}.html`);
-  if (fs.existsSync(htmlCandidate)) {
-    return `${normalizedPath}.html`;
-  }
-  const indexCandidate = path.join(
-    rootDir,
-    normalizedPath.slice(1),
-    "index.html",
-  );
-  return fs.existsSync(indexCandidate) ? `${normalizedPath}/index.html` : null;
-}
-
-function htmlRewritePlugin(rootDir) {
-  const middleware = (req, _res, next) => {
-    const resolved = resolveHtmlPath(rootDir, req.url ?? "/");
-    if (resolved) {
-      req.url = resolved;
-    }
-    next();
-  };
-  return {
-    name: "html-rewrite",
-    configureServer(server) {
-      server.middlewares.use(middleware);
-    },
-    configurePreviewServer(server) {
-      server.middlewares.use(middleware);
-    },
-  };
-}
-
 export default defineConfig({
   appType: "mpa",
   root: srcRoot,
-  plugins: [htmlRewritePlugin(srcRoot)],
   build: {
     assetsDir: "",
     rollupOptions: {

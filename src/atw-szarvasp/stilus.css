@@ -1,0 +1,36 @@
+
+a:link    { color: white; }
+a:visited { color:  white; }
+a:active  { color:  white; }
+a {text-decoration: none;}
+
+.cim
+{font-family:Times New Roman, verdana;
+font-size:29;
+color:B7B459;
+font-weight:bold;}
+
+.halovany
+{font-family:Times New Roman, verdana;
+font-size:19;
+color:838A7C;}
+
+.sarok
+{font-family:Times New Roman, verdana;
+font-size:14;
+color:B7B459;}
+
+.megn
+{font-family:Times New Roman, verdana;
+font-size:11;
+color:838A7C;}
+
+.menu
+{font-family:Times New Roman, verdana;
+font-size:17;
+color: white;}
+
+.alja
+{font-family:Times New Roman, verdana;
+font-size:12;
+color:3B4838;}
